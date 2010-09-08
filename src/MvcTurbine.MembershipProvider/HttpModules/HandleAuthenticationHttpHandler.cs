@@ -14,7 +14,7 @@ namespace MvcTurbine.MembershipProvider.HttpModules
         public void Init(HttpApplication context)
         {
             context.AuthenticateRequest +=
-                (sender, e) => authenticationContext.Authenticate();
+                (sender, e) => authenticationContext.Authenticate(HttpContext.Current.User);
         }
 
         public void Dispose()

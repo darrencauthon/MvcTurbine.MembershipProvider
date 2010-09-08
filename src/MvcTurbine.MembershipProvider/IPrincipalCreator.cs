@@ -2,8 +2,8 @@
 
 namespace MvcTurbine.MembershipProvider
 {
-    public interface IAuthenticationContext
+    public interface IPrincipalCreator
     {
-        void Authenticate(IPrincipal principal);
+        IPrincipal CreateUnauthenticatedPrincipal();
     }
 }
