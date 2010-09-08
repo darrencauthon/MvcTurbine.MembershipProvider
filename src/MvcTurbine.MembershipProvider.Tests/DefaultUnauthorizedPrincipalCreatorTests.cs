@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
+﻿using System.Security.Principal;
 using AutoMoq;
 using NUnit.Framework;
 using Should;
@@ -23,7 +19,7 @@ namespace MvcTurbine.MembershipProvider.Tests
         [Test]
         public void Returns_a_genric_principal()
         {
-            var creator = mocker.Resolve<DefaultUnauthorizedPrincipalCreator>();
+            var creator = mocker.Resolve<DefaultUnauthenticatedPrincipalCreator>();
             var result = creator.Create();
 
             result.ShouldBeType(typeof (GenericPrincipal));
@@ -32,7 +28,7 @@ namespace MvcTurbine.MembershipProvider.Tests
         [Test]
         public void The_identity_on_the_principal_is_unauthenticated()
         {
-            var creator = mocker.Resolve<DefaultUnauthorizedPrincipalCreator>();
+            var creator = mocker.Resolve<DefaultUnauthenticatedPrincipalCreator>();
             var result = creator.Create();
 
             result.Identity.IsAuthenticated.ShouldBeFalse();

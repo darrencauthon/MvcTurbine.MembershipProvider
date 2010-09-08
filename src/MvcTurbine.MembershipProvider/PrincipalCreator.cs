@@ -6,16 +6,16 @@ namespace MvcTurbine.MembershipProvider
 {
     public class PrincipalCreator : IPrincipalCreator
     {
-        private readonly IUnauthorizedPrincipalCreator unauthorizedPrincipalCreator;
+        private readonly IUnauthenticatedPrincipalCreator unauthenticatedPrincipalCreator;
 
-        public PrincipalCreator(IUnauthorizedPrincipalCreator unauthorizedPrincipalCreator)
+        public PrincipalCreator(IUnauthenticatedPrincipalCreator unauthenticatedPrincipalCreator)
         {
-            this.unauthorizedPrincipalCreator = unauthorizedPrincipalCreator;
+            this.unauthenticatedPrincipalCreator = unauthenticatedPrincipalCreator;
         }
 
         public IPrincipal CreateUnauthenticatedPrincipal()
         {
-            return unauthorizedPrincipalCreator.Create();
+            return unauthenticatedPrincipalCreator.Create();
         }
 
         public IPrincipal CreatePrincipalFromTicket(FormsAuthenticationTicket ticket)

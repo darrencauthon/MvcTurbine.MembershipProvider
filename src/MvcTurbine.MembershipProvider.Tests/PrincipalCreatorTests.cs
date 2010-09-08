@@ -18,11 +18,11 @@ namespace MvcTurbine.MembershipProvider.Tests
         }
 
         [Test]
-        public void CreateUnauthorizedPrincipal_returns_the_principal_from_the_unauthorized_principal_creator()
+        public void CreateUnauthenticatedPrincipal_returns_the_principal_from_the_unauthorized_principal_creator()
         {
             var expected = new Mock<IPrincipal>().Object;
 
-            mocker.GetMock<IUnauthorizedPrincipalCreator>()
+            mocker.GetMock<IUnauthenticatedPrincipalCreator>()
                 .Setup(x => x.Create())
                 .Returns(expected);
 

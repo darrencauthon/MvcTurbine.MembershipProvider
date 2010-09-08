@@ -2,7 +2,7 @@
 
 namespace MvcTurbine.MembershipProvider
 {
-    public class DefaultUnauthorizedPrincipalCreator : IUnauthorizedPrincipalCreator
+    public class DefaultUnauthenticatedPrincipalCreator : IUnauthenticatedPrincipalCreator
     {
         public IPrincipal Create()
         {

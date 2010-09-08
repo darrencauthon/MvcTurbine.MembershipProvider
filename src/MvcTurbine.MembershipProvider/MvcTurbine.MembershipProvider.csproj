@@ -49,11 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationContext.cs" />
-    <Compile Include="DefaultUnauthorizedPrincipalCreator.cs" />
+    <Compile Include="DefaultUnauthenticatedPrincipalCreator.cs" />
     <Compile Include="HttpModules\HandleAuthenticationHttpHandler.cs" />
     <Compile Include="IAuthenticationContext.cs" />
     <Compile Include="IPrincipalCreator.cs" />
-    <Compile Include="IUnauthorizedPrincipalCreator.cs" />
+    <Compile Include="IUnauthenticatedPrincipalCreator.cs" />
     <Compile Include="PrincipalCreator.cs" />
     <Compile Include="PrincipalSetter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
