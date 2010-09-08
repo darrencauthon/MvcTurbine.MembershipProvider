@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationContextTests.cs" />
+    <Compile Include="DefaultUnauthorizedPrincipalCreatorTests.cs" />
     <Compile Include="PrincipalCreatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
