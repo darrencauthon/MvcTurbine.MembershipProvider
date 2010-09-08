@@ -52,7 +52,7 @@
     <Compile Include="HttpModules\HandleAuthenticationHttpHandler.cs" />
     <Compile Include="IAuthenticationContext.cs" />
     <Compile Include="IPrincipalCreator.cs" />
-    <Compile Include="IPrincipalSetter.cs" />
+    <Compile Include="PrincipalSetter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
