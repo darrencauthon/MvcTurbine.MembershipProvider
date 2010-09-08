@@ -1,4 +1,5 @@
 ﻿using System.Security.Principal;
+using System.Web.Security;
 
 namespace MvcTurbine.MembershipProvider
 {
@@ -16,7 +17,33 @@ namespace MvcTurbine.MembershipProvider
 
         public void Authenticate(IPrincipal principal)
         {
+            if (ThisIsAValidPrincipal(principal))
+                UseThePrincipleFromTheTicket(principal);
+            else
+                UseAnUnauthenticatedPrinciple();
+        }
+
+        private void UseAnUnauthenticatedPrinciple()
+        {
             principalSetter.SetPricipal(principalCreator.CreateUnauthenticatedPrincipal());
+        }
+
+        private void UseThePrincipleFromTheTicket(IPrincipal principal)
+        {
+            var ticket = GetTheTicketFromThePrincipal(principal);
+            var principalFromTicket = principalCreator.CreatePrincipalFromTicket(ticket);
+            principalSetter.SetPricipal(principalFromTicket);
+        }
+
+        private FormsAuthenticationTicket GetTheTicketFromThePrincipal(IPrincipal principal)
+        {
+            return ((FormsIdentity) principal.Identity).Ticket;
+        }
+
+        private bool ThisIsAValidPrincipal(IPrincipal principal)
+        {
+            return principal != null && principal.Identity.IsAuthenticated &&
+                   principal.Identity.GetType() == typeof (FormsIdentity);
         }
     }
 }
