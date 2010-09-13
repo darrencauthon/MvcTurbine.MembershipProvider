@@ -54,8 +54,10 @@
     <Compile Include="IAuthenticationContext.cs" />
     <Compile Include="IPrincipalCreator.cs" />
     <Compile Include="IPrincipalFromTicketCreator.cs" />
+    <Compile Include="IPrincipalFromUserDataCreator.cs" />
     <Compile Include="IUnauthenticatedPrincipalCreator.cs" />
     <Compile Include="PrincipalCreator.cs" />
+    <Compile Include="PrincipalFromTicketCreator.cs" />
     <Compile Include="PrincipalSetter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
