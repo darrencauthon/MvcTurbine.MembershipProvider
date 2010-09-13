@@ -1,4 +1,6 @@
-﻿using System.Security.Principal;
+﻿using System;
+using System.Security.Principal;
+using System.Web.Security;
 using AutoMoq;
 using Moq;
 using NUnit.Framework;
@@ -30,6 +32,28 @@ namespace MvcTurbine.MembershipProvider.Tests
             var result = creator.CreateUnauthenticatedPrincipal();
 
             result.ShouldBeSameAs(expected);
+        }
+
+        [Test]
+        public void CreatePrincipalFromTicket_returns_principal_created_from_the_principal_from_ticket_creator()
+        {
+            var expected = new Mock<IPrincipal>().Object;
+
+            var ticket = CreateTicket();
+
+            mocker.GetMock<IPrincipalFromTicketCreator>()
+                .Setup(x => x.Create(ticket))
+                .Returns(expected);
+
+            var creator = mocker.Resolve<PrincipalCreator>();
+            var result = creator.CreatePrincipalFromTicket(ticket);
+
+            result.ShouldBeSameAs(expected);   
+        }
+
+        private FormsAuthenticationTicket CreateTicket()
+        {
+            return new FormsAuthenticationTicket(1, "test", DateTime.Now, DateTime.Now, false, "");
         }
     }
 }

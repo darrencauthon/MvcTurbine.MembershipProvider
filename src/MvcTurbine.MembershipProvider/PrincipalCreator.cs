@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.Principal;
+﻿using System.Security.Principal;
 using System.Web.Security;
 
 namespace MvcTurbine.MembershipProvider
@@ -7,10 +6,13 @@ namespace MvcTurbine.MembershipProvider
     public class PrincipalCreator : IPrincipalCreator
     {
         private readonly IUnauthenticatedPrincipalCreator unauthenticatedPrincipalCreator;
+        private readonly IPrincipalFromTicketCreator principalFromTicketCreator;
 
-        public PrincipalCreator(IUnauthenticatedPrincipalCreator unauthenticatedPrincipalCreator)
+        public PrincipalCreator(IUnauthenticatedPrincipalCreator unauthenticatedPrincipalCreator,
+                                IPrincipalFromTicketCreator principalFromTicketCreator)
         {
             this.unauthenticatedPrincipalCreator = unauthenticatedPrincipalCreator;
+            this.principalFromTicketCreator = principalFromTicketCreator;
         }
 
         public IPrincipal CreateUnauthenticatedPrincipal()
@@ -20,7 +22,7 @@ namespace MvcTurbine.MembershipProvider
 
         public IPrincipal CreatePrincipalFromTicket(FormsAuthenticationTicket ticket)
         {
-            throw new NotImplementedException();
+            return principalFromTicketCreator.Create(ticket);
         }
     }
 }
