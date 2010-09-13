@@ -32,13 +32,6 @@ namespace MvcTurbine.MembershipProvider.Tests
                 .Verify(x => x.SetPricipal(expected), Times.Once());
         }
 
-        private void ThePrincipalCreatorWillReturnThisAsAnUnauthenticatedPrincipal(IPrincipal expected)
-        {
-            mocker.GetMock<IPrincipalCreator>()
-                .Setup(x => x.CreateUnauthenticatedPrincipal())
-                .Returns(expected);
-        }
-
         [Test]
         public void Sets_the_principal_to_one_generated_from_a_ticket_when_passed_a_principal_with_a_ticket()
         {
@@ -101,7 +94,14 @@ namespace MvcTurbine.MembershipProvider.Tests
                 .Verify(x => x.SetPricipal(expected), Times.Once());
         }
 
-        private IPrincipal CreateAPrincipalWithThisIdentity(Mock<IIdentity> identityFake)
+        private void ThePrincipalCreatorWillReturnThisAsAnUnauthenticatedPrincipal(IPrincipal expected)
+        {
+            mocker.GetMock<IPrincipalCreator>()
+                .Setup(x => x.CreateUnauthenticatedPrincipal())
+                .Returns(expected);
+        }
+
+        private static IPrincipal CreateAPrincipalWithThisIdentity(Mock<IIdentity> identityFake)
         {
             var principalFake = new Mock<IPrincipal>();
             principalFake.Setup(x => x.Identity)
@@ -110,7 +110,7 @@ namespace MvcTurbine.MembershipProvider.Tests
             return principalFake.Object;
         }
 
-        private IPrincipal CreateAPrincipal()
+        private static IPrincipal CreateAPrincipal()
         {
             return new Mock<IPrincipal>().Object;
         }
@@ -123,7 +123,7 @@ namespace MvcTurbine.MembershipProvider.Tests
                 .Returns(expected);
         }
 
-        private IPrincipal CreatePrincipalWithThisTicket(FormsAuthenticationTicket ticket)
+        private static IPrincipal CreatePrincipalWithThisTicket(FormsAuthenticationTicket ticket)
         {
             var principalFake = new Mock<IPrincipal>();
             principalFake.Setup(x => x.Identity)
