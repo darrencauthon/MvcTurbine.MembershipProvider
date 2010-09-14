@@ -54,8 +54,10 @@
     <Compile Include="DefaultTicketDataToPrincipalMapper.cs" />
     <Compile Include="DefaultUnauthenticatedPrincipalCreator.cs" />
     <Compile Include="HttpModules\HandleAuthenticationHttpHandler.cs" />
+    <Compile Include="IPrincipalProvider.cs" />
     <Compile Include="ITicketDataToPrincipalMapper.cs" />
     <Compile Include="IUnauthenticatedPrincipalCreator.cs" />
+    <Compile Include="MembershipService.cs" />
     <Compile Include="PrincipalCreator.cs" />
     <Compile Include="PrincipalFromTicketCreator.cs" />
     <Compile Include="PrincipalFromUserDataCreator.cs" />

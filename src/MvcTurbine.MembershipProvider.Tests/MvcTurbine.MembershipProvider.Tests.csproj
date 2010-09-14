@@ -59,6 +59,7 @@
     <Compile Include="AuthenticationContextTests.cs" />
     <Compile Include="DefaultTicketDataToPrincipalMapperTests.cs" />
     <Compile Include="DefaultUnauthorizedPrincipalCreatorTests.cs" />
+    <Compile Include="MembershipServiceTests.cs" />
     <Compile Include="PrincipalCreatorTests.cs" />
     <Compile Include="PrincipalFromTicketCreatorTests.cs" />
     <Compile Include="PrincipalFromUserDataCreatorTests.cs" />
