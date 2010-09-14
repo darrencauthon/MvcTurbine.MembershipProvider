@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace MvcTurbine.MembershipProvider
 {
@@ -12,10 +11,13 @@ namespace MvcTurbine.MembershipProvider
     public class MembershipService : IMembershipService
     {
         private readonly IPrincipalProvider[] principalProviders;
+        private readonly IPrincipalLoginService principalLoginService;
 
-        public MembershipService(IPrincipalProvider[] principalProviders)
+        public MembershipService(IPrincipalProvider[] principalProviders,
+                                 IPrincipalLoginService principalLoginService)
         {
             this.principalProviders = principalProviders;
+            this.principalLoginService = principalLoginService;
         }
 
         public bool ValidateUser(string userId, string password)
@@ -26,7 +28,13 @@ namespace MvcTurbine.MembershipProvider
 
         public void LogInAsUser(string userId, string password)
         {
-            throw new NotImplementedException();
+            foreach (var principalProvider in principalProviders)
+            {
+                var principal = principalProvider.GetPrincipal(userId, password);
+                if (principal == null) continue;
+                principalLoginService.LogIn(principal);
+                break;
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ namespace MvcTurbine.MembershipProvider.Tests
             principalProvider.Setup(x => x.GetPrincipal("username", "password"))
                 .Returns(new Mock<IPrincipal>().Object);
 
-            var service = new MembershipService(new[] {principalProvider.Object});
+            var service = new MembershipService(new[] {principalProvider.Object}, null);
             var result = service.ValidateUser("username", "password");
 
             result.ShouldBeTrue();
@@ -28,7 +28,7 @@ namespace MvcTurbine.MembershipProvider.Tests
             principalProvider.Setup(x => x.GetPrincipal("username", "password"))
                 .Returns((string username, string password) => null);
 
-            var service = new MembershipService(new[] {principalProvider.Object});
+            var service = new MembershipService(new[] {principalProvider.Object}, null);
             var result = service.ValidateUser("username", "password");
 
             result.ShouldBeFalse();
@@ -41,7 +41,7 @@ namespace MvcTurbine.MembershipProvider.Tests
             principalProvider.Setup(x => x.GetPrincipal("username", "password"))
                 .Returns((string username, string password) => null);
 
-            var service = new MembershipService(new IPrincipalProvider[] {});
+            var service = new MembershipService(new IPrincipalProvider[] {}, null);
             var result = service.ValidateUser("username", "password");
 
             result.ShouldBeFalse();
