@@ -3,6 +3,11 @@ using System.Web.Security;
 
 namespace MvcTurbine.MembershipProvider
 {
+    public interface IAuthenticationContext
+    {
+        void Authenticate(IPrincipal principal);
+    }
+
     public class AuthenticationContext : IAuthenticationContext
     {
         private readonly IPrincipalCreator principalCreator;

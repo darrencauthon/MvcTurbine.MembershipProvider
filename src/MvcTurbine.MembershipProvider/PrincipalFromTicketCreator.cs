@@ -3,6 +3,11 @@ using System.Web.Security;
 
 namespace MvcTurbine.MembershipProvider
 {
+    public interface IPrincipalFromTicketCreator
+    {
+        IPrincipal Create(FormsAuthenticationTicket ticket);
+    }
+
     public class PrincipalFromTicketCreator : IPrincipalFromTicketCreator
     {
         private readonly IPrincipalFromUserDataCreator principalFromUserDataCreator;

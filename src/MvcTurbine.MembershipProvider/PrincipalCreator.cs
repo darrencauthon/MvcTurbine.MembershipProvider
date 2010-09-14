@@ -3,6 +3,12 @@ using System.Web.Security;
 
 namespace MvcTurbine.MembershipProvider
 {
+    public interface IPrincipalCreator
+    {
+        IPrincipal CreateUnauthenticatedPrincipal();
+        IPrincipal CreatePrincipalFromTicket(FormsAuthenticationTicket ticket);
+    }
+
     public class PrincipalCreator : IPrincipalCreator
     {
         private readonly IUnauthenticatedPrincipalCreator unauthenticatedPrincipalCreator;
