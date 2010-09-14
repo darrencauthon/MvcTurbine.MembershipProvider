@@ -30,12 +30,13 @@ namespace MvcTurbine.MembershipProvider.Blades
             return assembly.GetTypes()
                 .Where(x => x.IsAbstract == false)
                 .Where(x => x.IsInterface == false)
-                .Where(x => x.GetInterfaces().Contains(typeof (IUnauthenticatedPrincipalCreator)))
+                .Where(x => x.GetInterfaces().Contains(typeof(IUnauthenticatedPrincipalCreator)))
                 .OrderBy(PutTheDefaultLast());
         }
 
         private static Func<Type, int> PutTheDefaultLast()
         {
-            return x => x == typeof (DefaultUnauthenticatedPrincipalCreator) ? 1 : 0;
+            return x => x == typeof(DefaultUnauthenticatedPrincipalCreator) ? 1 : 0;
         }
     }
+}
