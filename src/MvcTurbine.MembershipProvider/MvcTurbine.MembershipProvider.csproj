@@ -55,9 +55,11 @@
     <Compile Include="IPrincipalCreator.cs" />
     <Compile Include="IPrincipalFromTicketCreator.cs" />
     <Compile Include="IPrincipalFromUserDataCreator.cs" />
+    <Compile Include="ITicketDataToPrincipalMapper.cs" />
     <Compile Include="IUnauthenticatedPrincipalCreator.cs" />
     <Compile Include="PrincipalCreator.cs" />
     <Compile Include="PrincipalFromTicketCreator.cs" />
+    <Compile Include="PrincipalFromUserDataCreator.cs" />
     <Compile Include="PrincipalSetter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
