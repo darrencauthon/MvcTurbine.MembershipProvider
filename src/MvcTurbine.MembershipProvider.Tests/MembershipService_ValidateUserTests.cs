@@ -6,7 +6,7 @@ using Should;
 namespace MvcTurbine.MembershipProvider.Tests
 {
     [TestFixture]
-    public class MembershipServiceTests
+    public class MembershipService_ValidateUserTests
     {
         [Test]
         public void Returns_true_when_a_principal_provider_returns_a_principal()
