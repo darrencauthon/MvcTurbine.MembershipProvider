@@ -60,6 +60,7 @@
     <Compile Include="PrincipalSetter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration\DefaultConventionsServiceRegistration.cs" />
+    <Compile Include="Registration\DefaultRegistration.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
