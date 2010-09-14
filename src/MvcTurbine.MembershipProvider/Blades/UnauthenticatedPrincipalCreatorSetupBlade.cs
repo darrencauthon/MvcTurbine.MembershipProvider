@@ -18,11 +18,11 @@ namespace MvcTurbine.MembershipProvider.Blades
 
         public override void Spin(IRotorContext context)
         {
-            var list = AppDomain.CurrentDomain.GetAssemblies()
+            var implementers = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(GetTypesThatImplementTheUnauthenticatedPrincipalCreator);
 
-            if (list.Any())
-                serviceLocator.Register<IUnauthenticatedPrincipalCreator>(list.First());
+            if (implementers.Any())
+                serviceLocator.Register<IUnauthenticatedPrincipalCreator>(implementers.First());
         }
 
         private static IEnumerable<Type> GetTypesThatImplementTheUnauthenticatedPrincipalCreator(Assembly assembly)
