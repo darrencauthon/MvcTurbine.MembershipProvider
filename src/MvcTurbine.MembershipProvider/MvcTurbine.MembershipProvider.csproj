@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationContext.cs" />
+    <Compile Include="Blades\PrincipalProviderBlade.cs" />
     <Compile Include="Blades\TicketDataToPrincipalMapperSetupBlade.cs" />
     <Compile Include="Blades\UnauthenticatedPrincipalCreatorSetupBlade.cs" />
     <Compile Include="DefaultTicketDataToPrincipalMapper.cs" />
