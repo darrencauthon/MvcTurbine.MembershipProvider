@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+using MvcTurbine.MembershipProvider;
 using SampleApplication.Models;
 
 namespace SampleApplication.Controllers
@@ -15,21 +16,15 @@ namespace SampleApplication.Controllers
     [HandleError]
     public class AccountController : Controller
     {
-
-        public IFormsAuthenticationService FormsService { get; set; }
         public IMembershipService MembershipService { get; set; }
-
-        protected override void Initialize(RequestContext requestContext)
-        {
-            if (FormsService == null) { FormsService = new FormsAuthenticationService(); }
-            if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
-
-            base.Initialize(requestContext);
-        }
-
         // **************************************
         // URL: /Account/LogOn
         // **************************************
+
+        public AccountController(IMembershipService membershipService)
+        {
+            MembershipService = membershipService;
+        }
 
         public ActionResult LogOn()
         {
@@ -43,7 +38,7 @@ namespace SampleApplication.Controllers
             {
                 if (MembershipService.ValidateUser(model.UserName, model.Password))
                 {
-                    FormsService.SignIn(model.UserName, model.RememberMe);
+                    MembershipService.LogInAsUser(model.UserName, model.Password);
                     if (!String.IsNullOrEmpty(returnUrl))
                     {
                         return Redirect(returnUrl);
@@ -69,8 +64,6 @@ namespace SampleApplication.Controllers
 
         public ActionResult LogOff()
         {
-            FormsService.SignOut();
-
             return RedirectToAction("Index", "Home");
         }
 
@@ -80,7 +73,7 @@ namespace SampleApplication.Controllers
 
         public ActionResult Register()
         {
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+            //ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
             return View();
         }
 
@@ -89,22 +82,22 @@ namespace SampleApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
-                MembershipCreateStatus createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email);
+                //// Attempt to register the user
+                //MembershipCreateStatus createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email);
 
-                if (createStatus == MembershipCreateStatus.Success)
-                {
-                    FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError("", AccountValidation.ErrorCodeToString(createStatus));
-                }
+                //if (createStatus == MembershipCreateStatus.Success)
+                //{
+                //    FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
+                //    return RedirectToAction("Index", "Home");
+                //}
+                //else
+                //{
+                //    ModelState.AddModelError("", AccountValidation.ErrorCodeToString(createStatus));
+                //}
             }
 
             // If we got this far, something failed, redisplay form
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+            //ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
             return View(model);
         }
 
@@ -115,7 +108,7 @@ namespace SampleApplication.Controllers
         [Authorize]
         public ActionResult ChangePassword()
         {
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+            //ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
             return View();
         }
 
@@ -125,18 +118,18 @@ namespace SampleApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (MembershipService.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword))
-                {
-                    return RedirectToAction("ChangePasswordSuccess");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
-                }
+                //if (MembershipService.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword))
+                //{
+                //    return RedirectToAction("ChangePasswordSuccess");
+                //}
+                //else
+                //{
+                //    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                //}
             }
 
             // If we got this far, something failed, redisplay form
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+            //ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
             return View(model);
         }
 

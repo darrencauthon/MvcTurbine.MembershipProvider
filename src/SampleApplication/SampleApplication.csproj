@@ -76,6 +76,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Principals\TemporaryPrincipalProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\DefaultRouting.cs" />
   </ItemGroup>
