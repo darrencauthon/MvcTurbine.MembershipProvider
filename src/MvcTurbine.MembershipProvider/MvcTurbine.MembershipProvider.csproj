@@ -55,7 +55,6 @@
     <Compile Include="DefaultUnauthenticatedPrincipalCreator.cs" />
     <Compile Include="HttpModules\HandleAuthenticationHttpHandler.cs" />
     <Compile Include="ICurrentPrincipalContext.cs" />
-    <Compile Include="IPrincipalLoginService.cs" />
     <Compile Include="IPrincipalProvider.cs" />
     <Compile Include="ITicketDataToPrincipalMapper.cs" />
     <Compile Include="IUnauthenticatedPrincipalCreator.cs" />

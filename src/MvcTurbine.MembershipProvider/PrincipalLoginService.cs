@@ -2,6 +2,11 @@
 
 namespace MvcTurbine.MembershipProvider
 {
+    public interface IPrincipalLoginService
+    {
+        void LogIn(IPrincipal principal);
+    }
+
     public class PrincipalLoginService : IPrincipalLoginService
     {
         private readonly ICurrentPrincipalContext currentPrincipalContext;
