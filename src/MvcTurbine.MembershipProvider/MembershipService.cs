@@ -30,9 +30,9 @@ namespace MvcTurbine.MembershipProvider
         {
             foreach (var principalProvider in principalProviders)
             {
-                var principal = principalProvider.GetPrincipal(userId, password);
-                if (principal == null) continue;
-                principalLoginService.LogIn(principal);
+                var result = principalProvider.GetPrincipal(userId, password);
+                if (result == null) continue;
+                principalLoginService.LogIn(result.Principal);
                 break;
             }
         }

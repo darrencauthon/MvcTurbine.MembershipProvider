@@ -5,9 +5,13 @@ namespace SampleApplication.Principals
 {
     public class TemporaryPrincipalProvider : IPrincipalProvider
     {
-        public IPrincipal GetPrincipal(string userId, string password)
+        public PrincipalProviderResult GetPrincipal(string userId, string password)
         {
-            return new GenericPrincipal(new GenericIdentity(userId), new string[] {});
+            return new PrincipalProviderResult
+                       {
+                           Principal = new GenericPrincipal(new GenericIdentity(userId), new string[] {})
+                       }
+                ;
         }
     }
 }

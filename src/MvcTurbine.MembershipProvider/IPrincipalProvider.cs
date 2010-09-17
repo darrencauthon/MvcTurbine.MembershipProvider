@@ -4,6 +4,11 @@ namespace MvcTurbine.MembershipProvider
 {
     public interface IPrincipalProvider
     {
-        IPrincipal GetPrincipal(string userId, string password);
+        PrincipalProviderResult GetPrincipal(string userId, string password);
+    }
+
+    public class PrincipalProviderResult
+    {
+        public IPrincipal Principal { get; set; }
     }
 }

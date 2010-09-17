@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using AutoMoq;
+﻿using System.Security.Principal;
 using Moq;
 using NUnit.Framework;
 
@@ -19,11 +14,12 @@ namespace MvcTurbine.MembershipProvider.Tests
 
             var validPrincipalProvider = new Mock<IPrincipalProvider>();
             validPrincipalProvider.Setup(x => x.GetPrincipal("user name", "password"))
-                .Returns(expected);
+                .Returns(CreateResultWithThisPrincipal(expected));
 
             var principalLoginService = new Mock<IPrincipalLoginService>();
 
-            var membershipService = new MembershipService(new[] {validPrincipalProvider.Object}, principalLoginService.Object);
+            var membershipService = new MembershipService(new[] {validPrincipalProvider.Object},
+                                                          principalLoginService.Object);
             membershipService.LogInAsUser("user name", "password");
 
             principalLoginService
@@ -39,11 +35,13 @@ namespace MvcTurbine.MembershipProvider.Tests
 
             var validPrincipalProvider = new Mock<IPrincipalProvider>();
             validPrincipalProvider.Setup(x => x.GetPrincipal("user name", "password"))
-                .Returns(expected);
+                .Returns(CreateResultWithThisPrincipal(expected));
 
             var invalidPrincipalProvider = new Mock<IPrincipalProvider>();
 
-            var membershipService = new MembershipService(new[] { invalidPrincipalProvider.Object, validPrincipalProvider.Object }, principalLoginService.Object);
+            var membershipService =
+                new MembershipService(new[] {invalidPrincipalProvider.Object, validPrincipalProvider.Object},
+                                      principalLoginService.Object);
             membershipService.LogInAsUser("user name", "password");
 
             principalLoginService
@@ -57,18 +55,26 @@ namespace MvcTurbine.MembershipProvider.Tests
 
             var provider1 = new Mock<IPrincipalProvider>();
             provider1.Setup(x => x.GetPrincipal("user name", "password"))
-                .Returns(new Mock<IPrincipal>().Object);
+                .Returns(CreateResultWithThisPrincipal(new Mock<IPrincipal>().Object));
 
-            var provider2 = new Mock<IPrincipalProvider>(); 
+            var provider2 = new Mock<IPrincipalProvider>();
             provider2.Setup(x => x.GetPrincipal("user name", "password"))
-                .Returns(new Mock<IPrincipal>().Object);
+                .Returns(CreateResultWithThisPrincipal(new Mock<IPrincipal>().Object));
 
-
-            var membershipService = new MembershipService(new[] { provider2.Object, provider1.Object }, principalLoginService.Object);
+            var membershipService = new MembershipService(new[] {provider2.Object, provider1.Object},
+                                                          principalLoginService.Object);
             membershipService.LogInAsUser("user name", "password");
 
             principalLoginService
-                .Verify(x => x.LogIn(It.IsAny<IPrincipal>()), Times.Once());            
+                .Verify(x => x.LogIn(It.IsAny<IPrincipal>()), Times.Once());
+        }
+
+        private PrincipalProviderResult CreateResultWithThisPrincipal(IPrincipal principal)
+        {
+            return new PrincipalProviderResult
+                       {
+                           Principal = principal,
+                       };
         }
     }
 }

@@ -13,7 +13,7 @@ namespace MvcTurbine.MembershipProvider.Tests
         {
             var principalProvider = new Mock<IPrincipalProvider>();
             principalProvider.Setup(x => x.GetPrincipal("username", "password"))
-                .Returns(new Mock<IPrincipal>().Object);
+                .Returns(CreateResultWithThisPrincipal(new Mock<IPrincipal>().Object));
 
             var service = new MembershipService(new[] {principalProvider.Object}, null);
             var result = service.ValidateUser("username", "password");
@@ -45,6 +45,14 @@ namespace MvcTurbine.MembershipProvider.Tests
             var result = service.ValidateUser("username", "password");
 
             result.ShouldBeFalse();
+        }
+
+        private PrincipalProviderResult CreateResultWithThisPrincipal(IPrincipal principal)
+        {
+            return new PrincipalProviderResult
+                       {
+                           Principal = principal,
+                       };
         }
     }
 }
