@@ -65,6 +65,7 @@
     <Compile Include="PrincipalFromTicketCreatorTests.cs" />
     <Compile Include="PrincipalFromUserDataCreatorTests.cs" />
     <Compile Include="PrincipalLoginServiceTests.cs" />
+    <Compile Include="PrincipalProviderResultTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

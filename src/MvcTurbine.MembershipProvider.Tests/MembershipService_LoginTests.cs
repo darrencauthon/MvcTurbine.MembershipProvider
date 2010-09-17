@@ -38,6 +38,8 @@ namespace MvcTurbine.MembershipProvider.Tests
                 .Returns(CreateResultWithThisPrincipal(expected));
 
             var invalidPrincipalProvider = new Mock<IPrincipalProvider>();
+            invalidPrincipalProvider.Setup(x => x.GetPrincipal(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(CreateResultWithThisPrincipal(null));
 
             var membershipService =
                 new MembershipService(new[] {invalidPrincipalProvider.Object, validPrincipalProvider.Object},

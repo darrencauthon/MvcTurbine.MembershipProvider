@@ -31,7 +31,7 @@ namespace MvcTurbine.MembershipProvider
             foreach (var principalProvider in principalProviders)
             {
                 var result = principalProvider.GetPrincipal(userId, password);
-                if (result == null) continue;
+                if (result.PrincipalExists == false) continue;
                 principalLoginService.LogIn(result.Principal);
                 break;
             }
