@@ -45,7 +45,7 @@ namespace MvcTurbine.MembershipProvider
             return ((FormsIdentity) principal.Identity).Ticket;
         }
 
-        private bool ThisIsAValidPrincipal(IPrincipal principal)
+        private static bool ThisIsAValidPrincipal(IPrincipal principal)
         {
             return principal != null && principal.Identity.IsAuthenticated &&
                    principal.Identity.GetType() == typeof (FormsIdentity);

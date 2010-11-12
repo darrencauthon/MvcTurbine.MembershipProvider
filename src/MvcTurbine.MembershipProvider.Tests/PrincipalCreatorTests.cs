@@ -48,7 +48,7 @@ namespace MvcTurbine.MembershipProvider.Tests
             var creator = mocker.Resolve<PrincipalCreator>();
             var result = creator.CreatePrincipalFromTicket(ticket);
 
-            result.ShouldBeSameAs(expected);   
+            result.ShouldBeSameAs(expected);
         }
 
         private FormsAuthenticationTicket CreateTicket()
