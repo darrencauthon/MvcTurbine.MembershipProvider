@@ -1,18 +1,19 @@
-﻿using System.Web.Security;
+﻿using System.Security.Principal;
+using System.Web.Security;
 using MvcTurbine.MembershipProvider.Helpers;
 
 namespace MvcTurbine.MembershipProvider
 {
     public class DefaultFormsAuthenticationTicketCreator
     {
-        public FormsAuthenticationTicket CreateFormsAuthenticationTicket(string userName, string userData)
+        public FormsAuthenticationTicket CreateFormsAuthenticationTicket(IPrincipal principal)
         {
             var now = CurrentDateTime.Now;
-            return new FormsAuthenticationTicket(1, userName,
+            return new FormsAuthenticationTicket(1, principal.Identity.Name,
                                                  now,
                                                  now.AddMinutes(2880),
                                                  true,
-                                                 userData,
+                                                 string.Empty,
                                                  FormsAuthentication.FormsCookiePath);
         }
     }

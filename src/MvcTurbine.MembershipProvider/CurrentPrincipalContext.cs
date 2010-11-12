@@ -25,7 +25,7 @@ namespace MvcTurbine.MembershipProvider
         private static FormsAuthenticationTicket CreateTheFormsAuthenticationTicket(IPrincipal principal)
         {
             return new DefaultFormsAuthenticationTicketCreator()
-                .CreateFormsAuthenticationTicket(principal.Identity.Name, "");
+                .CreateFormsAuthenticationTicket(principal);
         }
 
         private static HttpCookie CreateCookieForCurrentUser(IPrincipal principal)

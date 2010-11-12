@@ -40,7 +40,7 @@ namespace MvcTurbine.MembershipProvider
             principalSetter.SetPricipal(principalFromTicket);
         }
 
-        private FormsAuthenticationTicket GetTheTicketFromThePrincipal(IPrincipal principal)
+        private static FormsAuthenticationTicket GetTheTicketFromThePrincipal(IPrincipal principal)
         {
             return ((FormsIdentity) principal.Identity).Ticket;
         }
