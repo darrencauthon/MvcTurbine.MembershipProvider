@@ -22,22 +22,23 @@ namespace MvcTurbine.MembershipProvider
             cookies.Add(cookieForCurrentIdentity);
         }
 
-        private static string CreateEncryptedTicketForIdentity(IPrincipal principal)
+        private static FormsAuthenticationTicket CreateTheFormsAuthenticationTicket(IPrincipal principal)
         {
-            var ticket = new FormsAuthenticationTicket(1, principal.Identity.Name,
-                                                       DateTime.Now,
-                                                       DateTime.Now.AddMinutes(2880),
-                                                       true,
-                                                       "",
-                                                       FormsAuthentication.FormsCookiePath);
-
-            return FormsAuthentication.Encrypt(ticket);
+            return new DefaultFormsAuthenticationTicketCreator()
+                .CreateFormsAuthenticationTicket(principal.Identity.Name, "");
         }
 
         private static HttpCookie CreateCookieForCurrentUser(IPrincipal principal)
         {
             var encodedTicket = CreateEncryptedTicketForIdentity(principal);
             return new HttpCookie(FormsAuthentication.FormsCookieName, encodedTicket);
+        }
+
+        private static string CreateEncryptedTicketForIdentity(IPrincipal principal)
+        {
+            var ticket = CreateTheFormsAuthenticationTicket(principal);
+
+            return FormsAuthentication.Encrypt(ticket);
         }
 
         private static HttpCookieCollection GetCookies()
