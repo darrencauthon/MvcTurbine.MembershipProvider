@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationContextTests.cs" />
+    <Compile Include="DefaultFormsAuthenticationTicketCreatorTests.cs" />
     <Compile Include="DefaultTicketDataToPrincipalMapperTests.cs" />
     <Compile Include="DefaultUnauthorizedPrincipalCreatorTests.cs" />
     <Compile Include="MembershipService_LoginTests.cs" />
