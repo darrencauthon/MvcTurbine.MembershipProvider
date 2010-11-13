@@ -6,11 +6,16 @@ using MvcTurbine.MembershipProvider.Helpers;
 
 namespace MvcTurbine.MembershipProvider
 {
-    public class DefaultFormsAuthenticationTicketCreator
+    public interface IFormsAuthenticationTicketCreator
+    {
+        FormsAuthenticationTicket CreateFormsAuthenticationTicket(IPrincipal principal, Type type);
+    }
+
+    public class FormsAuthenticationTicketCreator : IFormsAuthenticationTicketCreator
     {
         private readonly IServiceLocator serviceLocator;
 
-        public DefaultFormsAuthenticationTicketCreator(IServiceLocator serviceLocator)
+        public FormsAuthenticationTicketCreator(IServiceLocator serviceLocator)
         {
             this.serviceLocator = serviceLocator;
         }

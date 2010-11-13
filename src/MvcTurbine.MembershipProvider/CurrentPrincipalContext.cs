@@ -12,11 +12,11 @@ namespace MvcTurbine.MembershipProvider
 
     public class CurrentPrincipalContext : ICurrentPrincipalContext
     {
-        private readonly DefaultFormsAuthenticationTicketCreator defaultFormsAuthenticationTicketCreator;
+        private readonly IFormsAuthenticationTicketCreator formsAuthenticationTicketCreator;
 
-        public CurrentPrincipalContext(DefaultFormsAuthenticationTicketCreator defaultFormsAuthenticationTicketCreator)
+        public CurrentPrincipalContext(IFormsAuthenticationTicketCreator formsAuthenticationTicketCreator)
         {
-            this.defaultFormsAuthenticationTicketCreator = defaultFormsAuthenticationTicketCreator;
+            this.formsAuthenticationTicketCreator = formsAuthenticationTicketCreator;
         }
 
         public void Set(IPrincipal principal, Type type)
@@ -31,7 +31,7 @@ namespace MvcTurbine.MembershipProvider
 
         private FormsAuthenticationTicket CreateTheFormsAuthenticationTicket(IPrincipal principal, Type type)
         {
-            var ticket = defaultFormsAuthenticationTicketCreator
+            var ticket = formsAuthenticationTicketCreator
                 .CreateFormsAuthenticationTicket(principal, type);
 
             return ticket;

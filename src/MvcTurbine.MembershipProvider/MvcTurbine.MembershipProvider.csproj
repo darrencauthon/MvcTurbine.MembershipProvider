@@ -52,7 +52,7 @@
     <Compile Include="Blades\PrincipalProviderBlade.cs" />
     <Compile Include="Blades\TicketDataToPrincipalMapperSetupBlade.cs" />
     <Compile Include="Blades\UnauthenticatedPrincipalCreatorSetupBlade.cs" />
-    <Compile Include="DefaultFormsAuthenticationTicketCreator.cs" />
+    <Compile Include="FormsAuthenticationTicketCreator.cs" />
     <Compile Include="DefaultTicketDataToPrincipalMapper.cs" />
     <Compile Include="DefaultUnauthenticatedPrincipalCreator.cs" />
     <Compile Include="Helpers\CurrentDateTime.cs" />

@@ -113,13 +113,13 @@ namespace MvcTurbine.MembershipProvider.Tests
             result.CookiePath.ShouldEqual(FormsAuthentication.FormsCookiePath);
         }
 
-        private DefaultFormsAuthenticationTicketCreator GetTheTicketCreator()
+        private FormsAuthenticationTicketCreator GetTheTicketCreator()
         {
             var serviceLocator = new TestServiceLocator();
 
             serviceLocator.ResolveThisInstanceAsThisType(testPrincipalProvider);
 
-            return new DefaultFormsAuthenticationTicketCreator(serviceLocator);
+            return new FormsAuthenticationTicketCreator(serviceLocator);
         }
 
         private FormsAuthenticationTicket CreateTheTicket()
