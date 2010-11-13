@@ -1,4 +1,5 @@
-﻿using System.Security.Principal;
+﻿using System;
+using System.Security.Principal;
 using MvcTurbine.MembershipProvider;
 
 namespace SampleApplication.Principals
@@ -12,6 +13,16 @@ namespace SampleApplication.Principals
                            Principal = new GenericPrincipal(new GenericIdentity(userId), new string[] {})
                        }
                 ;
+        }
+
+        public IPrincipal CreatePrincipalFromTicketData(string userName, string userData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TicketData ConvertPrincipalToTicketData(IPrincipal principal)
+        {
+            throw new NotImplementedException();
         }
     }
 }
