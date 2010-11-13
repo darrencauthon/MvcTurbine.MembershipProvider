@@ -17,12 +17,15 @@ namespace MvcTurbine.MembershipProvider
 
         public FormsAuthenticationTicket CreateFormsAuthenticationTicket(IPrincipal principal, Type type)
         {
+
+            var principalProvider = serviceLocator.Resolve(type) as IPrincipalProvider;
+
             var now = CurrentDateTime.Now;
             return new FormsAuthenticationTicket(1, principal.Identity.Name,
                                                  now,
                                                  now.AddMinutes(2880),
                                                  true,
-                                                 type + ", " + type.Assembly.FullName + "|" + string.Empty,
+                                                 type + ", " + type.Assembly.FullName + "|" + principalProvider.ConvertPrincipalToTicketData(principal).UserData,
                                                  FormsAuthentication.FormsCookiePath);
         }
     }

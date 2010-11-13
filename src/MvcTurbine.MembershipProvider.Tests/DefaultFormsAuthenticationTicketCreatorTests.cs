@@ -68,20 +68,25 @@ namespace MvcTurbine.MembershipProvider.Tests
         {
             var creator = GetTheTicketCreator();
             var principal = new GenericPrincipal(new GenericIdentity("expected"), new string[] {});
-            var result = creator.CreateFormsAuthenticationTicket(principal, typeof(string));
+            var result = creator.CreateFormsAuthenticationTicket(principal, typeof(TestPrincipalProvider));
 
             result.Name.ShouldEqual("expected");
         }
 
         [Test]
-        public void The_user_data_on_the_ticket_should_be_set_to_the_type_followed_by_pipe()
+        public void The_user_data_on_the_ticket_should_be_set_to_the_type_followed_by_pipe_followed_by_the_data_from_the_principal_provider()
         {
             var principalProviderType = typeof(TestPrincipalProvider);
+
+            testPrincipalProvider.UserData = "expected";
 
             var creator = GetTheTicketCreator();
             var result = creator.CreateFormsAuthenticationTicket(new GenericPrincipal(new GenericIdentity(""), new string[] {}), principalProviderType);
 
-            result.UserData.ShouldEqual(string.Format("{0}, {1}|", principalProviderType.FullName, principalProviderType.Assembly.FullName));
+            result.UserData.ShouldEqual(string.Format("{0}, {1}|{2}", 
+                principalProviderType.FullName, 
+                principalProviderType.Assembly.FullName,
+                "expected"));
         }
 
         [Test]
@@ -96,7 +101,7 @@ namespace MvcTurbine.MembershipProvider.Tests
         {
             var serviceLocator = new TestServiceLocator();
 
-            serviceLocator.ResolveThisInstanceAsThisType<IPrincipalProvider>(testPrincipalProvider);
+            serviceLocator.ResolveThisInstanceAsThisType(testPrincipalProvider);
 
             return new DefaultFormsAuthenticationTicketCreator(serviceLocator);
         }
@@ -122,8 +127,10 @@ namespace MvcTurbine.MembershipProvider.Tests
 
             public TicketData ConvertPrincipalToTicketData(IPrincipal principal)
             {
-                throw new NotImplementedException();
+                return new TicketData() {UserData = UserData};
             }
+
+            public string UserData { get; set; }
         }
 
         #region test service locator
