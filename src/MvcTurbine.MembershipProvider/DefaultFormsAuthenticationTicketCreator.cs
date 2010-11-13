@@ -21,11 +21,12 @@ namespace MvcTurbine.MembershipProvider
             var principalProvider = serviceLocator.Resolve(type) as IPrincipalProvider;
 
             var now = CurrentDateTime.Now;
+            var ticketData = principalProvider.ConvertPrincipalToTicketData(principal);
             return new FormsAuthenticationTicket(1, principal.Identity.Name,
                                                  now,
-                                                 now.AddMinutes(2880),
+                                                 now.AddMinutes(ticketData.NumberOfMinutesUntilExpiration),
                                                  true,
-                                                 type + ", " + type.Assembly.FullName + "|" + principalProvider.ConvertPrincipalToTicketData(principal).UserData,
+                                                 type + ", " + type.Assembly.FullName + "|" + ticketData.UserData,
                                                  FormsAuthentication.FormsCookiePath);
         }
     }

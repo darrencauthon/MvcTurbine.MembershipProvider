@@ -45,10 +45,12 @@ namespace MvcTurbine.MembershipProvider.Tests
         }
 
         [Test]
-        public void Adds_2880_minutes_to_the_current_date_as_the_expiration_date()
+        public void Adds_the_number_of_minutes_from_the_principal_provider_to_the_current_date_to_get_the_expiration_date()
         {
+            testPrincipalProvider.NumberOfMinutesUntilExpiration = 31;
+
             CurrentDateTime.SetNow(new DateTime(2010, 12, 25, 1, 2, 3));
-            var expectedExpirationDate = new DateTime(2010, 12, 25, 1, 2, 3).AddMinutes(2880);
+            var expectedExpirationDate = new DateTime(2010, 12, 25, 1, 2, 3).AddMinutes(31);
 
             var result = CreateTheTicket();
 
@@ -127,10 +129,13 @@ namespace MvcTurbine.MembershipProvider.Tests
 
             public TicketData ConvertPrincipalToTicketData(IPrincipal principal)
             {
-                return new TicketData() {UserData = UserData};
+                return new TicketData() {UserData = UserData,
+                NumberOfMinutesUntilExpiration = this.NumberOfMinutesUntilExpiration};
             }
 
             public string UserData { get; set; }
+
+            public int NumberOfMinutesUntilExpiration { get; set; }
         }
 
         #region test service locator
