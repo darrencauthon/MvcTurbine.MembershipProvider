@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Security.Principal;
 using System.Web.Security;
+using MvcTurbine.ComponentModel;
 using MvcTurbine.MembershipProvider.Helpers;
 
 namespace MvcTurbine.MembershipProvider
 {
     public class DefaultFormsAuthenticationTicketCreator
     {
+        private readonly IServiceLocator serviceLocator;
+
+        public DefaultFormsAuthenticationTicketCreator(IServiceLocator serviceLocator)
+        {
+            this.serviceLocator = serviceLocator;
+        }
+
         public FormsAuthenticationTicket CreateFormsAuthenticationTicket(IPrincipal principal, Type type)
         {
             var now = CurrentDateTime.Now;

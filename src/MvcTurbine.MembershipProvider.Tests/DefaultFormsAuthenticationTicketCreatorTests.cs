@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Principal;
 using System.Web.Security;
-using AutoMoq;
+using MvcTurbine.ComponentModel;
 using MvcTurbine.MembershipProvider.Helpers;
 using NUnit.Framework;
 using Should;
@@ -11,12 +12,12 @@ namespace MvcTurbine.MembershipProvider.Tests
     [TestFixture]
     public class DefaultFormsAuthenticationTicketCreatorTests
     {
-        private AutoMoqer mocker;
+        private TestPrincipalProvider testPrincipalProvider;
 
         [SetUp]
         public void Setup()
         {
-            mocker = new AutoMoqer();
+            testPrincipalProvider = new TestPrincipalProvider();
         }
 
         [Test]
@@ -75,7 +76,7 @@ namespace MvcTurbine.MembershipProvider.Tests
         [Test]
         public void The_user_data_on_the_ticket_should_be_set_to_the_type_followed_by_pipe()
         {
-            var principalProviderType = typeof(string);
+            var principalProviderType = typeof(TestPrincipalProvider);
 
             var creator = GetTheTicketCreator();
             var result = creator.CreateFormsAuthenticationTicket(new GenericPrincipal(new GenericIdentity(""), new string[] {}), principalProviderType);
@@ -93,14 +94,132 @@ namespace MvcTurbine.MembershipProvider.Tests
 
         private DefaultFormsAuthenticationTicketCreator GetTheTicketCreator()
         {
-            return mocker.Resolve<DefaultFormsAuthenticationTicketCreator>();
+            var serviceLocator = new TestServiceLocator();
+
+            serviceLocator.ResolveThisInstanceAsThisType<IPrincipalProvider>(testPrincipalProvider);
+
+            return new DefaultFormsAuthenticationTicketCreator(serviceLocator);
         }
 
         private FormsAuthenticationTicket CreateTheTicket()
         {
             var creator = GetTheTicketCreator();
             return
-                creator.CreateFormsAuthenticationTicket(new GenericPrincipal(new GenericIdentity(""), new string[] {}), typeof(string));
+                creator.CreateFormsAuthenticationTicket(new GenericPrincipal(new GenericIdentity(""), new string[] {}), typeof(TestPrincipalProvider));
         }
+
+        private class TestPrincipalProvider : IPrincipalProvider
+        {
+            public PrincipalProviderResult GetPrincipal(string userId, string userData)
+            {
+                throw new NotImplementedException();
+            }
+
+            public IPrincipal CreatePrincipalFromTicketData(string userName, string userData)
+            {
+                throw new NotImplementedException();
+            }
+
+            public TicketData ConvertPrincipalToTicketData(IPrincipal principal)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        #region test service locator
+        private class TestServiceLocator : IServiceLocator
+        {
+            private IDictionary<Type, object> thingsToResolve = new Dictionary<Type, object>();
+            public void ResolveThisInstanceAsThisType<T>(T instance)
+            {
+                thingsToResolve.Add(typeof(T), instance);
+            }
+
+            public void Dispose()
+            {
+                throw new NotImplementedException();
+            }
+
+            public T Resolve<T>() where T : class
+            {
+                return thingsToResolve[typeof(T)] as T;
+            }
+
+            public T Resolve<T>(string key) where T : class
+            {
+                throw new NotImplementedException();
+            }
+
+            public T Resolve<T>(Type type) where T : class
+            {
+                throw new NotImplementedException();
+            }
+
+            public object Resolve(Type type)
+            {
+                return thingsToResolve[type];
+            }
+
+            public IList<T> ResolveServices<T>() where T : class
+            {
+                throw new NotImplementedException();
+            }
+
+            public IServiceRegistrar Batch()
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Register<Interface>(Type implType) where Interface : class
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Register<Interface, Implementation>() where Implementation : class, Interface
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Register<Interface, Implementation>(string key) where Implementation : class, Interface
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Register(string key, Type type)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Register(Type serviceType, Type implType)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Register<Interface>(Interface instance) where Interface : class
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Release(object instance)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Reset()
+            {
+                throw new NotImplementedException();
+            }
+
+            public TService Inject<TService>(TService instance) where TService : class
+            {
+                throw new NotImplementedException();
+            }
+
+            public void TearDown<TService>(TService instance) where TService : class
+            {
+                throw new NotImplementedException();
+            }
+        }
+        #endregion
     }
 }

@@ -12,6 +12,13 @@ namespace MvcTurbine.MembershipProvider
 
     public class CurrentPrincipalContext : ICurrentPrincipalContext
     {
+        private readonly DefaultFormsAuthenticationTicketCreator defaultFormsAuthenticationTicketCreator;
+
+        public CurrentPrincipalContext(DefaultFormsAuthenticationTicketCreator defaultFormsAuthenticationTicketCreator)
+        {
+            this.defaultFormsAuthenticationTicketCreator = defaultFormsAuthenticationTicketCreator;
+        }
+
         public void Set(IPrincipal principal, Type type)
         {
             HttpContext.Current.User = principal;
@@ -22,21 +29,21 @@ namespace MvcTurbine.MembershipProvider
             cookies.Add(cookieForCurrentIdentity);
         }
 
-        private static FormsAuthenticationTicket CreateTheFormsAuthenticationTicket(IPrincipal principal, Type type)
+        private FormsAuthenticationTicket CreateTheFormsAuthenticationTicket(IPrincipal principal, Type type)
         {
-            var ticket = new DefaultFormsAuthenticationTicketCreator()
+            var ticket = defaultFormsAuthenticationTicketCreator
                 .CreateFormsAuthenticationTicket(principal, type);
 
             return ticket;
         }
 
-        private static HttpCookie CreateCookieForCurrentUser(IPrincipal principal, Type type)
+        private HttpCookie CreateCookieForCurrentUser(IPrincipal principal, Type type)
         {
             var encodedTicket = CreateEncryptedTicketForIdentity(principal, type);
             return new HttpCookie(FormsAuthentication.FormsCookieName, encodedTicket);
         }
 
-        private static string CreateEncryptedTicketForIdentity(IPrincipal principal, Type type)
+        private string CreateEncryptedTicketForIdentity(IPrincipal principal, Type type)
         {
             var ticket = CreateTheFormsAuthenticationTicket(principal, type);
 
