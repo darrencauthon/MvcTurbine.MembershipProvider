@@ -61,7 +61,7 @@
     <Compile Include="IPrincipalProvider.cs" />
     <Compile Include="ITicketDataToPrincipalMapper.cs" />
     <Compile Include="IUnauthenticatedPrincipalCreator.cs" />
-    <Compile Include="MembershipService.cs" />
+    <Compile Include="IMembershipService.cs" />
     <Compile Include="PrincipalCreator.cs" />
     <Compile Include="PrincipalFromTicketCreator.cs" />
     <Compile Include="PrincipalFromUserDataCreator.cs" />
@@ -70,6 +70,7 @@
     <Compile Include="Contexts\PrincipalContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration\DefaultRegistration.cs" />
+    <Compile Include="Services\MembershipService.cs" />
     <Compile Include="TicketData.cs" />
   </ItemGroup>
   <ItemGroup />

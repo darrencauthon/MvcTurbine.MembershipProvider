@@ -1,13 +1,7 @@
 ﻿using System.Linq;
 
-namespace MvcTurbine.MembershipProvider
+namespace MvcTurbine.MembershipProvider.Services
 {
-    public interface IMembershipService
-    {
-        bool ValidateUser(string userId, string password);
-        void LogInAsUser(string userId, string password);
-    }
-
     public class MembershipService : IMembershipService
     {
         private readonly IPrincipalProvider[] principalProviders;

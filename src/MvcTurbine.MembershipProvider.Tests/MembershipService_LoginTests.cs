@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Principal;
 using Moq;
+using MvcTurbine.MembershipProvider.Services;
 using NUnit.Framework;
 
 namespace MvcTurbine.MembershipProvider.Tests
