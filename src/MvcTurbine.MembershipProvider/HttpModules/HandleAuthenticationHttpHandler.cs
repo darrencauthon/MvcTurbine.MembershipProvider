@@ -1,4 +1,5 @@
 ﻿using System.Web;
+using MvcTurbine.MembershipProvider.Contexts;
 
 namespace MvcTurbine.MembershipProvider.HttpModules
 {

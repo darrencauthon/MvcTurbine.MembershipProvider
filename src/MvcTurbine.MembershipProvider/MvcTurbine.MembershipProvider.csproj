@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthenticationContext.cs" />
+    <Compile Include="Contexts\AuthenticationContext.cs" />
     <Compile Include="Blades\PrincipalProviderBlade.cs" />
     <Compile Include="Blades\TicketDataToPrincipalMapperSetupBlade.cs" />
     <Compile Include="Blades\UnauthenticatedPrincipalCreatorSetupBlade.cs" />
@@ -57,7 +57,7 @@
     <Compile Include="DefaultUnauthenticatedPrincipalCreator.cs" />
     <Compile Include="Helpers\CurrentDateTime.cs" />
     <Compile Include="HttpModules\HandleAuthenticationHttpHandler.cs" />
-    <Compile Include="CurrentPrincipalContext.cs" />
+    <Compile Include="Contexts\CurrentPrincipalContext.cs" />
     <Compile Include="IPrincipalProvider.cs" />
     <Compile Include="ITicketDataToPrincipalMapper.cs" />
     <Compile Include="IUnauthenticatedPrincipalCreator.cs" />

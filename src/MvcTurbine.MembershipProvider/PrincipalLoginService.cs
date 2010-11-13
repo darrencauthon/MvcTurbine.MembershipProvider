@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Principal;
+using MvcTurbine.MembershipProvider.Contexts;
 
 namespace MvcTurbine.MembershipProvider
 {

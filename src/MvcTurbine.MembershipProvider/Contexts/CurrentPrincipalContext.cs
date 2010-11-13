@@ -3,7 +3,7 @@ using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
 
-namespace MvcTurbine.MembershipProvider
+namespace MvcTurbine.MembershipProvider.Contexts
 {
     public interface ICurrentPrincipalContext
     {

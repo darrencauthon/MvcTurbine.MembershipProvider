@@ -3,6 +3,7 @@ using System.Security.Principal;
 using System.Web.Security;
 using AutoMoq;
 using Moq;
+using MvcTurbine.MembershipProvider.Contexts;
 using NUnit.Framework;
 
 namespace MvcTurbine.MembershipProvider.Tests
