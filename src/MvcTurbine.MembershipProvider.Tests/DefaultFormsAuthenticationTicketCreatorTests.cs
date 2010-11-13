@@ -67,17 +67,20 @@ namespace MvcTurbine.MembershipProvider.Tests
         {
             var creator = GetTheTicketCreator();
             var principal = new GenericPrincipal(new GenericIdentity("expected"), new string[] {});
-            var result = creator.CreateFormsAuthenticationTicket(principal);
+            var result = creator.CreateFormsAuthenticationTicket(principal, typeof(string));
 
             result.Name.ShouldEqual("expected");
         }
 
         [Test]
-        public void The_user_data_on_the_ticket_should_be_set_to_an_empty_string()
+        public void The_user_data_on_the_ticket_should_be_set_to_the_type_followed_by_pipe()
         {
-            var result = CreateTheTicket();
+            var principalProviderType = typeof(string);
 
-            result.UserData.ShouldEqual("");
+            var creator = GetTheTicketCreator();
+            var result = creator.CreateFormsAuthenticationTicket(new GenericPrincipal(new GenericIdentity(""), new string[] {}), principalProviderType);
+
+            result.UserData.ShouldEqual(principalProviderType + "|");
         }
 
         [Test]
@@ -97,7 +100,7 @@ namespace MvcTurbine.MembershipProvider.Tests
         {
             var creator = GetTheTicketCreator();
             return
-                creator.CreateFormsAuthenticationTicket(new GenericPrincipal(new GenericIdentity(""), new string[] {}));
+                creator.CreateFormsAuthenticationTicket(new GenericPrincipal(new GenericIdentity(""), new string[] {}), typeof(string));
         }
     }
 }

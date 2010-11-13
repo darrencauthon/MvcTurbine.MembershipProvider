@@ -22,13 +22,13 @@ namespace MvcTurbine.MembershipProvider.Tests
             var principal = CreateAPrincipal();
 
             var service = mocker.Resolve<PrincipalLoginService>();
-            service.LogIn(principal, null);
+            service.LogIn(principal, typeof(string));
 
             mocker.GetMock<ICurrentPrincipalContext>()
-                .Verify(x => x.Set(principal), Times.Once());
+                .Verify(x => x.Set(principal, typeof(string)), Times.Once());
         }
 
-        private IPrincipal CreateAPrincipal()
+        private static IPrincipal CreateAPrincipal()
         {
             return new Mock<IPrincipal>().Object;
         }

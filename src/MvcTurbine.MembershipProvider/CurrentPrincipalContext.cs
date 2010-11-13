@@ -7,36 +7,38 @@ namespace MvcTurbine.MembershipProvider
 {
     public interface ICurrentPrincipalContext
     {
-        void Set(IPrincipal principal);
+        void Set(IPrincipal principal, Type type);
     }
 
     public class CurrentPrincipalContext : ICurrentPrincipalContext
     {
-        public void Set(IPrincipal principal)
+        public void Set(IPrincipal principal, Type type)
         {
             HttpContext.Current.User = principal;
 
-            var cookieForCurrentIdentity = CreateCookieForCurrentUser(principal);
+            var cookieForCurrentIdentity = CreateCookieForCurrentUser(principal, type);
 
             var cookies = GetCookies();
             cookies.Add(cookieForCurrentIdentity);
         }
 
-        private static FormsAuthenticationTicket CreateTheFormsAuthenticationTicket(IPrincipal principal)
+        private static FormsAuthenticationTicket CreateTheFormsAuthenticationTicket(IPrincipal principal, Type type)
         {
-            return new DefaultFormsAuthenticationTicketCreator()
-                .CreateFormsAuthenticationTicket(principal);
+            var ticket = new DefaultFormsAuthenticationTicketCreator()
+                .CreateFormsAuthenticationTicket(principal, type);
+
+            return ticket;
         }
 
-        private static HttpCookie CreateCookieForCurrentUser(IPrincipal principal)
+        private static HttpCookie CreateCookieForCurrentUser(IPrincipal principal, Type type)
         {
-            var encodedTicket = CreateEncryptedTicketForIdentity(principal);
+            var encodedTicket = CreateEncryptedTicketForIdentity(principal, type);
             return new HttpCookie(FormsAuthentication.FormsCookieName, encodedTicket);
         }
 
-        private static string CreateEncryptedTicketForIdentity(IPrincipal principal)
+        private static string CreateEncryptedTicketForIdentity(IPrincipal principal, Type type)
         {
-            var ticket = CreateTheFormsAuthenticationTicket(principal);
+            var ticket = CreateTheFormsAuthenticationTicket(principal, type);
 
             return FormsAuthentication.Encrypt(ticket);
         }

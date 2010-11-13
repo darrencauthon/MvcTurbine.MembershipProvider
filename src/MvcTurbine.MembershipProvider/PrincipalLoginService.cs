@@ -17,9 +17,9 @@ namespace MvcTurbine.MembershipProvider
             this.currentPrincipalContext = currentPrincipalContext;
         }
 
-        public void LogIn(IPrincipal principal, Type getType)
+        public void LogIn(IPrincipal principal, Type type)
         {
-            currentPrincipalContext.Set(principal);
+            currentPrincipalContext.Set(principal, type);
         }
     }
 }
