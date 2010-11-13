@@ -17,7 +17,7 @@ namespace MvcTurbine.MembershipProvider.Tests
         [SetUp]
         public void Setup()
         {
-            testPrincipalProvider = new TestPrincipalProvider();
+            testPrincipalProvider = new TestPrincipalProvider{TicketDataToReturn = new TicketData()};
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace MvcTurbine.MembershipProvider.Tests
         [Test]
         public void Adds_the_number_of_minutes_from_the_principal_provider_to_the_current_date_to_get_the_expiration_date()
         {
-            testPrincipalProvider.NumberOfMinutesUntilExpiration = 31;
+            testPrincipalProvider.TicketDataToReturn.NumberOfMinutesUntilExpiration = 31;
 
             CurrentDateTime.SetNow(new DateTime(2010, 12, 25, 1, 2, 3));
             var expectedExpirationDate = new DateTime(2010, 12, 25, 1, 2, 3).AddMinutes(31);
@@ -58,11 +58,23 @@ namespace MvcTurbine.MembershipProvider.Tests
         }
 
         [Test]
-        public void The_ticket_is_persistent()
+        public void The_ticket_is_persistent_when_ticket_data_states_so()
         {
+            testPrincipalProvider.TicketDataToReturn.IsPersistent = true;
+
             var result = CreateTheTicket();
 
             result.IsPersistent.ShouldBeTrue();
+        }
+
+        [Test]
+        public void The_ticket_is_not_persistent_when_ticket_data_states_so()
+        {
+            testPrincipalProvider.TicketDataToReturn.IsPersistent = false;
+
+            var result = CreateTheTicket();
+
+            result.IsPersistent.ShouldBeFalse();
         }
 
         [Test]
@@ -80,7 +92,7 @@ namespace MvcTurbine.MembershipProvider.Tests
         {
             var principalProviderType = typeof(TestPrincipalProvider);
 
-            testPrincipalProvider.UserData = "expected";
+            testPrincipalProvider.TicketDataToReturn.UserData = "expected";
 
             var creator = GetTheTicketCreator();
             var result = creator.CreateFormsAuthenticationTicket(new GenericPrincipal(new GenericIdentity(""), new string[] {}), principalProviderType);
@@ -129,13 +141,10 @@ namespace MvcTurbine.MembershipProvider.Tests
 
             public TicketData ConvertPrincipalToTicketData(IPrincipal principal)
             {
-                return new TicketData() {UserData = UserData,
-                NumberOfMinutesUntilExpiration = this.NumberOfMinutesUntilExpiration};
+                return TicketDataToReturn;
             }
 
-            public string UserData { get; set; }
-
-            public int NumberOfMinutesUntilExpiration { get; set; }
+            public TicketData TicketDataToReturn { get; set; }
         }
 
         #region test service locator

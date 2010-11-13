@@ -25,7 +25,7 @@ namespace MvcTurbine.MembershipProvider
             return new FormsAuthenticationTicket(1, principal.Identity.Name,
                                                  now,
                                                  now.AddMinutes(ticketData.NumberOfMinutesUntilExpiration),
-                                                 true,
+                                                 ticketData.IsPersistent,
                                                  type + ", " + type.Assembly.FullName + "|" + ticketData.UserData,
                                                  FormsAuthentication.FormsCookiePath);
         }

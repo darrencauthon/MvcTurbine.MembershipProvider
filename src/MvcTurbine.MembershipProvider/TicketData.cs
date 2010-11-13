@@ -7,5 +7,7 @@ namespace MvcTurbine.MembershipProvider
         public string UserData { get; set; }
 
         public int NumberOfMinutesUntilExpiration { get; set; }
+
+        public bool IsPersistent { get; set; }
     }
 }
