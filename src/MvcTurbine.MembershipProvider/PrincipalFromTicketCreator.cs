@@ -1,5 +1,6 @@
 ﻿using System.Security.Principal;
 using System.Web.Security;
+using MvcTurbine.ComponentModel;
 
 namespace MvcTurbine.MembershipProvider
 {
@@ -10,16 +11,21 @@ namespace MvcTurbine.MembershipProvider
 
     public class PrincipalFromTicketCreator : IPrincipalFromTicketCreator
     {
+        private readonly IServiceLocator serviceLocator;
         private readonly IPrincipalFromUserDataCreator principalFromUserDataCreator;
 
-        public PrincipalFromTicketCreator(IPrincipalFromUserDataCreator principalFromUserDataCreator)
+        public PrincipalFromTicketCreator(IServiceLocator serviceLocator)
         {
-            this.principalFromUserDataCreator = principalFromUserDataCreator;
+            this.serviceLocator = serviceLocator;
         }
 
         public IPrincipal Create(FormsAuthenticationTicket ticket)
         {
-            return principalFromUserDataCreator.CreatePrincipal(ticket.Name, ticket.UserData);
+            var userDataArray = ticket.UserData.Split("|".ToCharArray(), 2);
+            var type = System.Type.GetType(userDataArray[0]);
+            var principalProvider = serviceLocator.Resolve(type) as IPrincipalProvider;
+            return principalProvider.CreatePrincipalFromTicketData(ticket.Name, userDataArray[1]);
+            //return principalFromUserDataCreator.CreatePrincipal(ticket.Name, ticket.UserData);
         }
     }
 }

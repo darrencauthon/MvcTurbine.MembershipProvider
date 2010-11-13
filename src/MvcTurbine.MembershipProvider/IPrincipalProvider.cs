@@ -4,7 +4,7 @@ namespace MvcTurbine.MembershipProvider
 {
     public interface IPrincipalProvider
     {
-        PrincipalProviderResult GetPrincipal(string userId, string password);
+        PrincipalProviderResult GetPrincipal(string userId, string userData);
 
         IPrincipal CreatePrincipalFromTicketData(string userName, string userData);
 

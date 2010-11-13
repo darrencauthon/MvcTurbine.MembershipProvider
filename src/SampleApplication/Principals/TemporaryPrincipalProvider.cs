@@ -6,13 +6,12 @@ namespace SampleApplication.Principals
 {
     public class TemporaryPrincipalProvider : IPrincipalProvider
     {
-        public PrincipalProviderResult GetPrincipal(string userId, string password)
+        public PrincipalProviderResult GetPrincipal(string userId, string userData)
         {
             return new PrincipalProviderResult
                        {
                            Principal = new GenericPrincipal(new GenericIdentity(userId), new string[] {})
-                       }
-                ;
+                       };
         }
 
         public IPrincipal CreatePrincipalFromTicketData(string userName, string userData)
