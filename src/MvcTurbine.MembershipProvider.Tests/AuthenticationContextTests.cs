@@ -29,7 +29,7 @@ namespace MvcTurbine.MembershipProvider.Tests
             var context = mocker.Resolve<AuthenticationContext>();
             context.Authenticate(null);
 
-            mocker.GetMock<IPrincipalSetter>()
+            mocker.GetMock<IPrincipalContext>()
                 .Verify(x => x.SetPricipal(expected), Times.Once());
         }
 
@@ -44,7 +44,7 @@ namespace MvcTurbine.MembershipProvider.Tests
             var context = mocker.Resolve<AuthenticationContext>();
             context.Authenticate(CreatePrincipalWithThisTicket(ticket));
 
-            mocker.GetMock<IPrincipalSetter>()
+            mocker.GetMock<IPrincipalContext>()
                 .Verify(x => x.SetPricipal(expected), Times.Once());
         }
 
@@ -57,7 +57,7 @@ namespace MvcTurbine.MembershipProvider.Tests
             var context = mocker.Resolve<AuthenticationContext>();
             context.Authenticate(CreatePrincipalWithThisTicket(CreateTicket("", "")));
 
-            mocker.GetMock<IPrincipalSetter>()
+            mocker.GetMock<IPrincipalContext>()
                 .Verify(x => x.SetPricipal(It.IsAny<IPrincipal>()), Times.Once());
         }
 
@@ -74,7 +74,7 @@ namespace MvcTurbine.MembershipProvider.Tests
             var context = mocker.Resolve<AuthenticationContext>();
             context.Authenticate(CreateAPrincipalWithThisIdentity(identityFake));
 
-            mocker.GetMock<IPrincipalSetter>()
+            mocker.GetMock<IPrincipalContext>()
                 .Verify(x => x.SetPricipal(expected), Times.Once());
         }
 
@@ -91,7 +91,7 @@ namespace MvcTurbine.MembershipProvider.Tests
             var context = mocker.Resolve<AuthenticationContext>();
             context.Authenticate(CreateAPrincipalWithThisIdentity(identityFake));
 
-            mocker.GetMock<IPrincipalSetter>()
+            mocker.GetMock<IPrincipalContext>()
                 .Verify(x => x.SetPricipal(expected), Times.Once());
         }
 

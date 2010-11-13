@@ -1,14 +1,14 @@
 ﻿using System.Security.Principal;
 using System.Web;
 
-namespace MvcTurbine.MembershipProvider
+namespace MvcTurbine.MembershipProvider.Contexts
 {
-    public interface IPrincipalSetter
+    public interface IPrincipalContext
     {
         void SetPricipal(IPrincipal principal);
     }
 
-    public class PrincipalSetter : IPrincipalSetter
+    public class PrincipalContext : IPrincipalContext
     {
         public void SetPricipal(IPrincipal principal)
         {

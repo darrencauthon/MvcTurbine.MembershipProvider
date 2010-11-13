@@ -67,7 +67,7 @@
     <Compile Include="PrincipalFromUserDataCreator.cs" />
     <Compile Include="PrincipalLoginService.cs" />
     <Compile Include="PrincipalProviderResult.cs" />
-    <Compile Include="PrincipalSetter.cs" />
+    <Compile Include="Contexts\PrincipalContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration\DefaultRegistration.cs" />
     <Compile Include="TicketData.cs" />

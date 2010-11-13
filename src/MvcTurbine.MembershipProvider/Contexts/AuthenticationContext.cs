@@ -11,13 +11,13 @@ namespace MvcTurbine.MembershipProvider.Contexts
     public class AuthenticationContext : IAuthenticationContext
     {
         private readonly IPrincipalCreator principalCreator;
-        private readonly IPrincipalSetter principalSetter;
+        private readonly IPrincipalContext principalContext;
 
         public AuthenticationContext(IPrincipalCreator principalCreator,
-                                     IPrincipalSetter principalSetter)
+                                     IPrincipalContext principalContext)
         {
             this.principalCreator = principalCreator;
-            this.principalSetter = principalSetter;
+            this.principalContext = principalContext;
         }
 
         public void Authenticate(IPrincipal principal)
@@ -30,14 +30,14 @@ namespace MvcTurbine.MembershipProvider.Contexts
 
         private void UseAnUnauthenticatedPrinciple()
         {
-            principalSetter.SetPricipal(principalCreator.CreateUnauthenticatedPrincipal());
+            principalContext.SetPricipal(principalCreator.CreateUnauthenticatedPrincipal());
         }
 
         private void UseThePrincipleFromTheTicket(IPrincipal principal)
         {
             var ticket = GetTheTicketFromThePrincipal(principal);
             var principalFromTicket = principalCreator.CreatePrincipalFromTicket(ticket);
-            principalSetter.SetPricipal(principalFromTicket);
+            principalContext.SetPricipal(principalFromTicket);
         }
 
         private static FormsAuthenticationTicket GetTheTicketFromThePrincipal(IPrincipal principal)
