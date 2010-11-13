@@ -16,7 +16,7 @@ namespace SampleApplication.Principals
 
         public IPrincipal CreatePrincipalFromTicketData(string userName, string userData)
         {
-            throw new NotImplementedException();
+            return new GenericPrincipal(new GenericIdentity(userName), new string[] {});
         }
 
         public TicketData ConvertPrincipalToTicketData(IPrincipal principal)

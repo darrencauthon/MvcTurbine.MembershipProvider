@@ -14,7 +14,7 @@ namespace MvcTurbine.MembershipProvider
                                                  now,
                                                  now.AddMinutes(2880),
                                                  true,
-                                                 type + "|" + string.Empty,
+                                                 type + ", " + type.Assembly.FullName + "|" + string.Empty,
                                                  FormsAuthentication.FormsCookiePath);
         }
     }

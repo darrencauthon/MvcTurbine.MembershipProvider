@@ -80,7 +80,7 @@ namespace MvcTurbine.MembershipProvider.Tests
             var creator = GetTheTicketCreator();
             var result = creator.CreateFormsAuthenticationTicket(new GenericPrincipal(new GenericIdentity(""), new string[] {}), principalProviderType);
 
-            result.UserData.ShouldEqual(principalProviderType + "|");
+            result.UserData.ShouldEqual(string.Format("{0}, {1}|", principalProviderType.FullName, principalProviderType.Assembly.FullName));
         }
 
         [Test]
