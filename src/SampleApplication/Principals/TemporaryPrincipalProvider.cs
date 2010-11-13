@@ -21,7 +21,13 @@ namespace SampleApplication.Principals
 
         public TicketData ConvertPrincipalToTicketData(IPrincipal principal)
         {
-            throw new NotImplementedException();
+            return new TicketData
+                       {
+                           IsPersistent = true,
+                           NumberOfMinutesUntilExpiration = 5,
+                           UserData = "testing1234",
+                           Username = "darren cauthon"
+                       };
         }
     }
 }
