@@ -78,10 +78,12 @@ namespace MvcTurbine.MembershipProvider.Tests
         }
 
         [Test]
-        public void The_username_on_the_ticket_should_be_set_to_the_name_on_the_identity()
+        public void The_name_on_the_ticket_should_be_set_according_to_the_ticket_data()
         {
+            testPrincipalProvider.TicketDataToReturn.Username = "expected";
+
             var creator = GetTheTicketCreator();
-            var principal = new GenericPrincipal(new GenericIdentity("expected"), new string[] {});
+            var principal = new GenericPrincipal(new GenericIdentity("not expected"), new string[] { });
             var result = creator.CreateFormsAuthenticationTicket(principal, typeof(TestPrincipalProvider));
 
             result.Name.ShouldEqual("expected");

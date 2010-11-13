@@ -9,5 +9,7 @@ namespace MvcTurbine.MembershipProvider
         public int NumberOfMinutesUntilExpiration { get; set; }
 
         public bool IsPersistent { get; set; }
+
+        public string Username { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace MvcTurbine.MembershipProvider
 
             var now = CurrentDateTime.Now;
             var ticketData = principalProvider.ConvertPrincipalToTicketData(principal);
-            return new FormsAuthenticationTicket(1, principal.Identity.Name,
+            return new FormsAuthenticationTicket(1, ticketData.Username,
                                                  now,
                                                  now.AddMinutes(ticketData.NumberOfMinutesUntilExpiration),
                                                  ticketData.IsPersistent,
