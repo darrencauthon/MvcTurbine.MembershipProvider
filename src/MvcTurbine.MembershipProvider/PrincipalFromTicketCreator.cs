@@ -1,4 +1,5 @@
-﻿using System.Security.Principal;
+﻿using System;
+using System.Security.Principal;
 using System.Web.Security;
 using MvcTurbine.ComponentModel;
 
@@ -21,11 +22,29 @@ namespace MvcTurbine.MembershipProvider
 
         public IPrincipal Create(FormsAuthenticationTicket ticket)
         {
-            var userDataArray = ticket.UserData.Split("|".ToCharArray(), 2);
-            var type = System.Type.GetType(userDataArray[0]);
-            var principalProvider = serviceLocator.Resolve(type) as IPrincipalProvider;
-            return principalProvider.CreatePrincipalFromTicketData(ticket.Name, userDataArray[1]);
-            //return principalFromUserDataCreator.CreatePrincipal(ticket.Name, ticket.UserData);
+            var principalProvider = GetThePrincipalProvider(ticket);
+            return principalProvider.CreatePrincipalFromTicketData(ticket.Name, GetTheUserDataOutOfTheTicket(ticket));
+        }
+
+        private static string GetTheUserDataOutOfTheTicket(FormsAuthenticationTicket ticket)
+        {
+            return GetTheUserDataArray(ticket)[1];
+        }
+
+        private IPrincipalProvider GetThePrincipalProvider(FormsAuthenticationTicket ticket)
+        {
+            var type = GetThePrincipalProviderType(ticket);
+            return serviceLocator.Resolve(type) as IPrincipalProvider;
+        }
+
+        private static Type GetThePrincipalProviderType(FormsAuthenticationTicket ticket)
+        {
+            return Type.GetType(GetTheUserDataArray(ticket)[0]);
+        }
+
+        private static string[] GetTheUserDataArray(FormsAuthenticationTicket ticket)
+        {
+            return ticket.UserData.Split("|".ToCharArray(), 2);
         }
     }
 }
