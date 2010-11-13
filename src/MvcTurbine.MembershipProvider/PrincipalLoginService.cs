@@ -1,10 +1,11 @@
-﻿using System.Security.Principal;
+﻿using System;
+using System.Security.Principal;
 
 namespace MvcTurbine.MembershipProvider
 {
     public interface IPrincipalLoginService
     {
-        void LogIn(IPrincipal principal);
+        void LogIn(IPrincipal principal, Type getType);
     }
 
     public class PrincipalLoginService : IPrincipalLoginService
@@ -16,7 +17,7 @@ namespace MvcTurbine.MembershipProvider
             this.currentPrincipalContext = currentPrincipalContext;
         }
 
-        public void LogIn(IPrincipal principal)
+        public void LogIn(IPrincipal principal, Type getType)
         {
             currentPrincipalContext.Set(principal);
         }

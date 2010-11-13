@@ -32,7 +32,7 @@ namespace MvcTurbine.MembershipProvider
             {
                 var result = principalProvider.GetPrincipal(userId, password);
                 if (result.PrincipalExists == false) continue;
-                principalLoginService.LogIn(result.Principal);
+                principalLoginService.LogIn(result.Principal, principalProvider.GetType());
                 break;
             }
         }

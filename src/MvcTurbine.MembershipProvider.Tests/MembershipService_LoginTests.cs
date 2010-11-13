@@ -1,4 +1,5 @@
-﻿using System.Security.Principal;
+﻿using System;
+using System.Security.Principal;
 using Moq;
 using NUnit.Framework;
 
@@ -23,7 +24,7 @@ namespace MvcTurbine.MembershipProvider.Tests
             membershipService.LogInAsUser("user name", "password");
 
             principalLoginService
-                .Verify(x => x.LogIn(expected), Times.Once());
+                .Verify(x => x.LogIn(expected, validPrincipalProvider.Object.GetType()), Times.Once());
         }
 
         [Test]
@@ -38,8 +39,9 @@ namespace MvcTurbine.MembershipProvider.Tests
                 .Returns(CreateResultWithThisPrincipal(expected));
 
             var invalidPrincipalProvider = new Mock<IPrincipalProvider>();
+            var resultWithThisPrincipal = CreateResultWithThisPrincipal(null);
             invalidPrincipalProvider.Setup(x => x.GetPrincipal(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns(CreateResultWithThisPrincipal(null));
+                .Returns(resultWithThisPrincipal);
 
             var membershipService =
                 new MembershipService(new[] {invalidPrincipalProvider.Object, validPrincipalProvider.Object},
@@ -47,7 +49,7 @@ namespace MvcTurbine.MembershipProvider.Tests
             membershipService.LogInAsUser("user name", "password");
 
             principalLoginService
-                .Verify(x => x.LogIn(null), Times.Never());
+                .Verify(x => x.LogIn(resultWithThisPrincipal.Principal, It.IsAny<Type>()), Times.Never());
         }
 
         [Test]
@@ -68,7 +70,7 @@ namespace MvcTurbine.MembershipProvider.Tests
             membershipService.LogInAsUser("user name", "password");
 
             principalLoginService
-                .Verify(x => x.LogIn(It.IsAny<IPrincipal>()), Times.Once());
+                .Verify(x => x.LogIn(It.IsAny<IPrincipal>(), It.IsAny<Type>()), Times.Once());
         }
 
         private PrincipalProviderResult CreateResultWithThisPrincipal(IPrincipal principal)
