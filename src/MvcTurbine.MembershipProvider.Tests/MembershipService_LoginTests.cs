@@ -3,6 +3,7 @@ using System.Security.Principal;
 using Moq;
 using MvcTurbine.MembershipProvider.Services;
 using NUnit.Framework;
+using Should;
 
 namespace MvcTurbine.MembershipProvider.Tests
 {
@@ -72,6 +73,24 @@ namespace MvcTurbine.MembershipProvider.Tests
 
             principalLoginService
                 .Verify(x => x.LogIn(It.IsAny<IPrincipal>(), It.IsAny<Type>()), Times.Once());
+        }
+
+        [Test]
+        public void The_new_principal_is_returned_from_LogIn()
+        {
+            var principalLoginService = new Mock<IPrincipalLoginService>();
+
+            var expected = new Mock<IPrincipal>().Object;
+
+            var provider = new Mock<IPrincipalProvider>();
+            provider.Setup(x => x.GetPrincipal("user name", "password"))
+                .Returns(CreateResultWithThisPrincipal(expected));
+
+            var membershipService = new MembershipService(new[] { provider.Object },
+                                                          principalLoginService.Object);
+            var result = membershipService.LogInAsUser("user name", "password");
+
+            result.ShouldBeSameAs(expected);
         }
 
         private PrincipalProviderResult CreateResultWithThisPrincipal(IPrincipal principal)
