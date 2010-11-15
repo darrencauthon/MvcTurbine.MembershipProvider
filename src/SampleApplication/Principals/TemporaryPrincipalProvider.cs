@@ -6,7 +6,7 @@ namespace SampleApplication.Principals
 {
     public class TemporaryPrincipalProvider : IPrincipalProvider
     {
-        public PrincipalProviderResult GetPrincipal(string userId, string userData)
+        public PrincipalProviderResult GetPrincipal(string userId, string password)
         {
             return new PrincipalProviderResult
                        {

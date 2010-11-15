@@ -131,7 +131,7 @@ namespace MvcTurbine.MembershipProvider.Tests
 
         private class TestPrincipalProvider : IPrincipalProvider
         {
-            public PrincipalProviderResult GetPrincipal(string userId, string userData)
+            public PrincipalProviderResult GetPrincipal(string userId, string password)
             {
                 throw new NotImplementedException();
             }

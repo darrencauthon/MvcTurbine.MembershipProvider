@@ -62,7 +62,7 @@ namespace MvcTurbine.MembershipProvider.Tests
                 PrincipalToReturn = principalToReturn;
             }
 
-            public PrincipalProviderResult GetPrincipal(string userId, string userData)
+            public PrincipalProviderResult GetPrincipal(string userId, string password)
             {
                 return null;
             }
