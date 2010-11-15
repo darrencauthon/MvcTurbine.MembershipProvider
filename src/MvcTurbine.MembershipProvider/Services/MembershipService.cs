@@ -18,7 +18,7 @@ namespace MvcTurbine.MembershipProvider.Services
         public bool ValidateUser(string userId, string password)
         {
             return principalProviders
-                .Any(x => x.GetPrincipal(userId, password) != null);
+                .Any(x => x.GetPrincipal(userId, password).PrincipalExists);
         }
 
         public IPrincipal LogInAsUser(string userId, string password)
