@@ -1,6 +1,6 @@
 ﻿using System.Security.Principal;
 
-namespace MvcTurbine.MembershipProvider
+namespace MvcTurbine.MembershipProvider.Mappers
 {
     public interface ITicketDataToPrincipalMapper
     {

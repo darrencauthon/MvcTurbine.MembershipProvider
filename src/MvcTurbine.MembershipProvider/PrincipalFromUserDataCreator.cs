@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Security.Principal;
+using MvcTurbine.MembershipProvider.Mappers;
 
 namespace MvcTurbine.MembershipProvider
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MvcTurbine.ComponentModel;
+using MvcTurbine.MembershipProvider.Mappers;
 
 namespace MvcTurbine.MembershipProvider.Registration
 {

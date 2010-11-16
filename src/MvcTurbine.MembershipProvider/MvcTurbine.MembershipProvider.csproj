@@ -53,13 +53,13 @@
     <Compile Include="Blades\TicketDataToPrincipalMapperSetupBlade.cs" />
     <Compile Include="Blades\UnauthenticatedPrincipalCreatorSetupBlade.cs" />
     <Compile Include="FormsAuthenticationTicketCreator.cs" />
-    <Compile Include="DefaultTicketDataToPrincipalMapper.cs" />
+    <Compile Include="Mappers\DefaultTicketDataToPrincipalMapper.cs" />
     <Compile Include="DefaultUnauthenticatedPrincipalCreator.cs" />
     <Compile Include="Helpers\CurrentDateTime.cs" />
     <Compile Include="HttpModules\HandleAuthenticationHttpHandler.cs" />
     <Compile Include="Contexts\CurrentPrincipalContext.cs" />
     <Compile Include="IPrincipalProvider.cs" />
-    <Compile Include="ITicketDataToPrincipalMapper.cs" />
+    <Compile Include="Mappers\ITicketDataToPrincipalMapper.cs" />
     <Compile Include="IUnauthenticatedPrincipalCreator.cs" />
     <Compile Include="IMembershipService.cs" />
     <Compile Include="PrincipalCreator.cs" />
