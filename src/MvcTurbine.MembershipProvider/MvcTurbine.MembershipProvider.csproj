@@ -66,6 +66,7 @@
     <Compile Include="PrincipalFromTicketCreator.cs" />
     <Compile Include="PrincipalFromUserDataCreator.cs" />
     <Compile Include="PrincipalLoginService.cs" />
+    <Compile Include="PrincipalProvider.cs" />
     <Compile Include="PrincipalProviderResult.cs" />
     <Compile Include="Contexts\PrincipalContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
