@@ -3,7 +3,7 @@ using System.Security.Principal;
 using System.Web.Security;
 using MvcTurbine.ComponentModel;
 
-namespace MvcTurbine.MembershipProvider
+namespace MvcTurbine.MembershipProvider.PrincipalHelpers
 {
     public interface IPrincipalFromTicketCreator
     {

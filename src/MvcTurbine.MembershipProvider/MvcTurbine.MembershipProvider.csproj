@@ -52,9 +52,9 @@
     <Compile Include="Blades\PrincipalProviderBlade.cs" />
     <Compile Include="Blades\TicketDataToPrincipalMapperSetupBlade.cs" />
     <Compile Include="Blades\UnauthenticatedPrincipalCreatorSetupBlade.cs" />
-    <Compile Include="FormsAuthenticationTicketCreator.cs" />
+    <Compile Include="PrincipalHelpers\FormsAuthenticationTicketCreator.cs" />
     <Compile Include="Mappers\DefaultTicketDataToPrincipalMapper.cs" />
-    <Compile Include="DefaultUnauthenticatedPrincipalCreator.cs" />
+    <Compile Include="PrincipalHelpers\DefaultUnauthenticatedPrincipalCreator.cs" />
     <Compile Include="Helpers\CurrentDateTime.cs" />
     <Compile Include="HttpModules\HandleAuthenticationHttpHandler.cs" />
     <Compile Include="Contexts\CurrentPrincipalContext.cs" />
@@ -62,10 +62,10 @@
     <Compile Include="Mappers\ITicketDataToPrincipalMapper.cs" />
     <Compile Include="IUnauthenticatedPrincipalCreator.cs" />
     <Compile Include="IMembershipService.cs" />
-    <Compile Include="PrincipalCreator.cs" />
-    <Compile Include="PrincipalFromTicketCreator.cs" />
-    <Compile Include="PrincipalFromUserDataCreator.cs" />
-    <Compile Include="PrincipalLoginService.cs" />
+    <Compile Include="PrincipalHelpers\PrincipalCreator.cs" />
+    <Compile Include="PrincipalHelpers\PrincipalFromTicketCreator.cs" />
+    <Compile Include="PrincipalHelpers\PrincipalFromUserDataCreator.cs" />
+    <Compile Include="Services\PrincipalLoginService.cs" />
     <Compile Include="PrincipalProvider.cs" />
     <Compile Include="PrincipalProviderResult.cs" />
     <Compile Include="Contexts\PrincipalContext.cs" />

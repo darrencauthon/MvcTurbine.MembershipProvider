@@ -4,7 +4,7 @@ using System.Web.Security;
 using MvcTurbine.ComponentModel;
 using MvcTurbine.MembershipProvider.Helpers;
 
-namespace MvcTurbine.MembershipProvider
+namespace MvcTurbine.MembershipProvider.PrincipalHelpers
 {
     public interface IFormsAuthenticationTicketCreator
     {

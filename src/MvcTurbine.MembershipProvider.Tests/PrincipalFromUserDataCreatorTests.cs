@@ -1,6 +1,7 @@
 ﻿using System.Security.Principal;
 using Moq;
 using MvcTurbine.MembershipProvider.Mappers;
+using MvcTurbine.MembershipProvider.PrincipalHelpers;
 using NUnit.Framework;
 using Should;
 

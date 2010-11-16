@@ -4,6 +4,7 @@ using System.Security.Principal;
 using System.Web.Security;
 using MvcTurbine.ComponentModel;
 using MvcTurbine.MembershipProvider.Helpers;
+using MvcTurbine.MembershipProvider.PrincipalHelpers;
 using NUnit.Framework;
 using Should;
 

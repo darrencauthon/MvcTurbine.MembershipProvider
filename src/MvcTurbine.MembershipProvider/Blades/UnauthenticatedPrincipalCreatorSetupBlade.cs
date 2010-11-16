@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using MvcTurbine.Blades;
 using MvcTurbine.ComponentModel;
+using MvcTurbine.MembershipProvider.PrincipalHelpers;
 
 namespace MvcTurbine.MembershipProvider.Blades
 {

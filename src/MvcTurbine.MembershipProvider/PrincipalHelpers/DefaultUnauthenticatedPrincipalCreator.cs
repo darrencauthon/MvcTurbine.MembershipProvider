@@ -1,6 +1,6 @@
 ﻿using System.Security.Principal;
 
-namespace MvcTurbine.MembershipProvider
+namespace MvcTurbine.MembershipProvider.PrincipalHelpers
 {
     public class DefaultUnauthenticatedPrincipalCreator : IUnauthenticatedPrincipalCreator
     {

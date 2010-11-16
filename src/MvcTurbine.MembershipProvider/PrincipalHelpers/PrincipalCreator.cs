@@ -1,7 +1,7 @@
 ﻿using System.Security.Principal;
 using System.Web.Security;
 
-namespace MvcTurbine.MembershipProvider
+namespace MvcTurbine.MembershipProvider.PrincipalHelpers
 {
     public interface IPrincipalCreator
     {

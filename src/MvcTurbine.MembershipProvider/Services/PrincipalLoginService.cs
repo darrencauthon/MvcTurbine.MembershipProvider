@@ -2,7 +2,7 @@
 using System.Security.Principal;
 using MvcTurbine.MembershipProvider.Contexts;
 
-namespace MvcTurbine.MembershipProvider
+namespace MvcTurbine.MembershipProvider.Services
 {
     public interface IPrincipalLoginService
     {

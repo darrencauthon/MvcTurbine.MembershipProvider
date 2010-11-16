@@ -5,6 +5,7 @@ using System.Web.Security;
 using AutoMoq;
 using Moq;
 using MvcTurbine.ComponentModel;
+using MvcTurbine.MembershipProvider.PrincipalHelpers;
 using NUnit.Framework;
 using Should;
 

@@ -2,6 +2,7 @@
 using AutoMoq;
 using Moq;
 using MvcTurbine.MembershipProvider.Contexts;
+using MvcTurbine.MembershipProvider.Services;
 using NUnit.Framework;
 
 namespace MvcTurbine.MembershipProvider.Tests

@@ -2,6 +2,7 @@
 using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
+using MvcTurbine.MembershipProvider.PrincipalHelpers;
 
 namespace MvcTurbine.MembershipProvider.Contexts
 {
