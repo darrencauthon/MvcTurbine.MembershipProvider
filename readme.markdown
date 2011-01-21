@@ -40,3 +40,4 @@ If you want more control over the timeout, the type of principal created, etc., 
 
 Implementing these methods will handle everything necessary to convert data from the standard .Net FormsAuthenticationTicket into the appropriate Principal that you need.  MvcTurbine.MembershipProvider will also record which principal provider handled the login, so it will know which principal provider to instantiate and use on every page request when setting HttpContext.Current.User.
 
+
