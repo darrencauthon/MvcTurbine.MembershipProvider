@@ -28,14 +28,22 @@ namespace MvcTurbine.MembershipProvider.Blades
 
             if (implementers.Any())
                 serviceLocator.Register<ITicketDataToPrincipalMapper>(implementers.First());
+            else
+                serviceLocator.Register<ITicketDataToPrincipalMapper, DefaultTicketDataToPrincipalMapper>();
         }
 
         private static IEnumerable<Type> GetTypesThatImplementTheUnauthenticatedPrincipalCreator(Assembly assembly)
         {
-            return assembly.GetTypes()
-                .Where(x => x.IsAbstract == false)
-                .Where(x => x.IsInterface == false)
-                .Where(x => x.GetInterfaces().Contains(typeof (ITicketDataToPrincipalMapper)));
+            try
+            {
+                return assembly.GetTypes()
+                    .Where(x => x.IsAbstract == false)
+                    .Where(x => x.IsInterface == false)
+                    .Where(x => x.GetInterfaces().Contains(typeof (ITicketDataToPrincipalMapper)));
+            } catch
+            {
+                return new Type[] {};
+            }
         }
     }
 }

@@ -24,15 +24,23 @@ namespace MvcTurbine.MembershipProvider.Blades
 
             if (implementers.Any())
                 serviceLocator.Register<IUnauthenticatedPrincipalCreator>(implementers.First());
+            else
+                serviceLocator.Register<IUnauthenticatedPrincipalCreator, DefaultUnauthenticatedPrincipalCreator>();
         }
 
         private static IEnumerable<Type> GetTypesThatImplementTheUnauthenticatedPrincipalCreator(Assembly assembly)
         {
-            return assembly.GetTypes()
-                .Where(x => x.IsAbstract == false)
-                .Where(x => x.IsInterface == false)
-                .Where(x => x.GetInterfaces().Contains(typeof (IUnauthenticatedPrincipalCreator)))
-                .OrderBy(PutTheDefaultLast());
+            try
+            {
+                return assembly.GetTypes()
+                    .Where(x => x.IsAbstract == false)
+                    .Where(x => x.IsInterface == false)
+                    .Where(x => x.GetInterfaces().Contains(typeof (IUnauthenticatedPrincipalCreator)))
+                    .OrderBy(PutTheDefaultLast());
+            } catch
+            {
+                return new Type[] {};
+            }
         }
 
         private static Func<Type, int> PutTheDefaultLast()
